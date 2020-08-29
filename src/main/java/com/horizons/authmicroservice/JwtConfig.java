@@ -3,7 +3,7 @@ package com.horizons.authmicroservice;
 import org.springframework.beans.factory.annotation.Value;
 
 public class JwtConfig {
-    @Value("${security.jwt.uri:/**}")
+    @Value("${security.jwt.uri:/auth/**}")
     private String Uri;
 
     @Value("${security.jwt.header:Authorization}")
