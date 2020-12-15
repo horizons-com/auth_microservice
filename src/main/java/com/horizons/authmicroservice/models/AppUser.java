@@ -10,10 +10,19 @@ public class AppUser {
     private String password;
     private String role;
 
-    public AppUser(String username, String password) {
+    public AppUser() {
+    }
+
+    public AppUser(String username, String password, String role) {
         this.username = username;
         this.password = password;
+        this.role = role;
     }
+
+    public AppUser(String username, String password) {
+        this(username, password, "GUEST");
+    }
+
     public String getId() {
         return id.toHexString();
     }

@@ -26,10 +26,9 @@ public class UserDetailsServiceImpl implements UserDetailsService  {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        appUserRepository.insert(new AppUser("test", encoder.encode("test")));
         final List<AppUser> users = appUserRepository.findAll();
 
-        //
+        // Iterate through all results to find the username
         for(AppUser appUser: users) {
             if(appUser.getUsername() != null && appUser.getUsername().equals(username)) {
 

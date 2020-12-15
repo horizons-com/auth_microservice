@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.horizons.authmicroservice.models.AppUser;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -46,7 +47,7 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
         try {
 
             // 1. Get credentials from request
-            UserCredentials creds = new ObjectMapper().readValue(request.getInputStream(), UserCredentials.class);
+            AppUser creds = new ObjectMapper().readValue(request.getInputStream(), AppUser.class);
 
             // 2. Create auth object (contains credentials) which will be used by auth manager
             UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
@@ -80,27 +81,5 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
 
         // Add token to header
         response.addHeader(jwtConfig.getHeader(), jwtConfig.getPrefix() + token);
-    }
-
-    // A (temporary) class just to represent the user credentials
-    private static class UserCredentials {
-        private String username;
-        private String password;
-
-        public String getUsername() {
-            return username;
-        }
-
-        public void setUsername(String username) {
-            this.username = username;
-        }
-
-        public String getPassword() {
-            return password;
-        }
-
-        public void setPassword(String password) {
-            this.password = password;
-        }
     }
 }

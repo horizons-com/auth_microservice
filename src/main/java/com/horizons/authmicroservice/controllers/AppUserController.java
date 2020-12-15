@@ -4,10 +4,7 @@ import com.horizons.authmicroservice.models.AppUser;
 import com.horizons.authmicroservice.repositories.AppUserRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -18,7 +15,7 @@ public class AppUserController {
     private AppUserRepository appUserRepository;
 
     @PostMapping("/")
-    public AppUser createStudent( @Valid @RequestBody AppUser appUser) {
+    public AppUser createUser( @Valid @RequestBody AppUser appUser) {
         appUser.setId(ObjectId.get());
         appUserRepository.save(appUser);
         return appUser;
@@ -27,5 +24,11 @@ public class AppUserController {
     @GetMapping("/")
     public List<AppUser> getAllUsers()  {
         return appUserRepository.findAll();
+    }
+
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public AppUser getMessageById(@PathVariable("id") ObjectId id) {
+        return appUserRepository.findById(id);
     }
 }
