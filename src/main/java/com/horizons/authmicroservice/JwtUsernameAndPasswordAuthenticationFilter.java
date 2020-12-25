@@ -76,6 +76,7 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
                         .map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
                 .setIssuedAt(new Date(now))
                 .setExpiration(new Date(now + jwtConfig.getExpiration() * 1000))  // in milliseconds
+
                 .signWith(SignatureAlgorithm.HS512, jwtConfig.getSecret().getBytes())
                 .compact();
 
@@ -84,7 +85,7 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
 
         // Add token to body
         // TODO: This is temporary, pending finding out how to get the client to read the token from the response headers instead of body.
-        response.getWriter().write("{\"token\":\"" + token + "\",\"username\":\"" + auth.getName() + "\"}");
+        response.getWriter().write("{\"token\":\"" + token + "\",\"username\":\"test\"}");
         response.getWriter().flush();
         response.getWriter().close();
     }

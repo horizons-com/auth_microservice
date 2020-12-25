@@ -31,10 +31,14 @@ public class AppUserController {
         return appUserRepository.findAll();
     }
 
-
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public AppUser getAppUserById(@PathVariable("id") ObjectId id) {
         return appUserRepository.findById(id);
+    }
+
+    @RequestMapping(value = "/user/{username}", method = RequestMethod.GET)
+    public AppUser getAppUserById(@PathVariable("username") String username) {
+        return appUserRepository.findByUsername(username);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
