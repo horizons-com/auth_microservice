@@ -11,8 +11,8 @@
 	<groupId>com.horizons</groupId>
 	<artifactId>authmicroservice</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>auth-microservice</name>
-	<description>Demo project for Spring Boot</description>
+	<name>Auth</name>
+	<description>Authorization and users microservice</description>
 
 	<properties>
 		<java.version>14</java.version>
